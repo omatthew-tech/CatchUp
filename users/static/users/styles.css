@@ -1,0 +1,175 @@
+body {
+    background-color: #FFFDD0; /* Cream */
+    color: #008080; /* Teal */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #FF69B4; /* Rosy Pink */
+}
+
+a {
+    color: #FF7F50; /* Warm Orange */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #DAA520; /* Golden Brown */
+}
+
+/* Header Styles */
+.header {
+    background-color: #008080; /* Teal */
+    color: #FFFDD0; /* Cream */
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+nav a {
+    color: #FFFDD0; /* Cream */
+    font-size: 1.1em;
+    margin: 0 1em;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FF7F50; /* Warm Orange */
+}
+
+/* Main Content Styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.center-text {
+    text-align: center;
+    padding: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .center-text {
+        font-size: 20px;
+    }
+}
+
+.fade {
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #8B0000; /* Deep Red */
+    color: #FFFDD0; /* Cream */
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Additional styles for the registration and login pages */
+.register-form, .login-form {
+    background-color: #FFFDD0; /* Cream */
+    max-width: 600px; /* Increase maximum width */
+    min-height: 400px; /* Set a minimum height */
+    margin: 20px auto;
+    padding: 60px; /* Increase padding */
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1); /* Increase box-shadow for a floating effect */
+    transition: box-shadow 0.3s ease; /* Add transition for a smooth hover effect */
+}
+
+.register-form:hover, .login-form:hover {
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.1); /* Change box-shadow on hover */
+}
+
+.register-form h2, .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-form form, .login-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form form .submit-btn, .login-form form .submit-btn {
+    background-color: #008080; /* Teal */
+    color: #FFFDD0; /* Cream */
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-form form .submit-btn:hover, .login-form form .submit-btn:hover {
+    background-color: #00666B; /* Darker Teal */
+}
+
+.register-form .login-link, .login-form .register-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.register-form .login-link a, .login-form .register-link a {
+    color: #FF7F50; /* Warm Orange */
+}
+/* Form field styles */
+form input[type="text"], form input[type="password"], form input[type="email"] {
+    min-width: 200px; /* Set a minimum width */
+    max-width: 500px; /* Set a maximum width */
+    width: 100%; /* Make the input fields take up the full width of their container */
+    padding: 15px; /* Increase padding to make the fields taller */
+    margin-bottom: 20px; /* Add some margin to the bottom of each field */
+    border: 1px solid #DAA520; /* Golden Brown border */
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: border-color 0.3s ease; /* Add transition for a smooth hover effect */
+}
+
+form input[type="text"]:focus, form input[type="password"]:focus, form input[type="email"]:focus {
+    border-color: #FF7F50; /* Warm Orange border on focus */
+}
+
+form input[type="submit"] {
+    background-color: #FF69B4; /* Rosy Pink */
+    color: #FFFDD0; /* Cream */
+    border: none;
+    padding: 15px 20px; /* Make the button taller and wider */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Change the mouse cursor when hovering over the button */
+    margin-top: 20px;
+    transition: background-color 0.3s ease; /* Add transition for a smooth hover effect */
+}
+
+form input[type="submit"]:hover {
+    background-color: #DAA520; /* Golden Brown background on hover */
+}
+
+
+
+
+

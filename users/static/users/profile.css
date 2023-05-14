@@ -1,0 +1,74 @@
+.profile-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.profile-header {
+    display: flex;
+    align-items: start; /* aligns items to the start of the cross axis, which is vertical in this case */
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* This makes the profile picture round */
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-posts {
+    margin-top: 20px;
+}
+
+.post {
+    position: relative;
+    background-color: #FFFDD0; /* Cream */
+    border: 1px solid #DAA520; /* Golden Brown */
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.post:hover {
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+
+.post-date {
+    color: #aaa; /* light gray */
+    font-size: 0.8rem;
+    position:
+
+}
+
+.profile-location-occupation {
+    display: flex;
+    gap: 10px;  /* adjust this value to increase or decrease the space between the elements */
+    align-items: center;  /* center the elements vertically */
+    font-size: 0.85rem;  /* adjust this value to increase or decrease the font size */
+    color: #777;  /* this is a lighter gray color */
+}
+
+.profile-details h2 {
+    margin-bottom: 0.5rem;  /* adjust this value to increase or decrease the space */
+}
+
+.profile-location-occupation p {
+    margin: 0;  /* removes the default margin from the <p> tags */
+}

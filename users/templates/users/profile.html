@@ -1,0 +1,53 @@
+{% extends "users/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/profile.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <div class="profile-header">
+            <img class="profile-pic" src="{{ user.userprofile.profile_picture.url }}" alt="{{ user.username }}'s Profile Picture">
+            <div class="profile-info">
+                <div class="profile-details">
+                    <h2 class>{{ user.userprofile.first_name }} {{ user.userprofile.last_name }}</h2>
+                    <div class="profile-location-occupation">
+                        <p>{{ user.userprofile.occupation }}</p>
+                        <p>|</p>
+                        <p>{{ user.userprofile.location }}</p>
+                    </div>
+                </div>
+                <p>{{ user.userprofile.bio }}</p>
+            </div>
+        </div>
+        
+        <div class="profile-posts">
+            <h3>{{ user.userprofile.first_name }}'s Posts</h3>
+            <!-- Loop through the user's posts -->
+            {% for post in posts %}
+            <div class="post">
+                <small class="post-date">{{ post.created_at|date:"F j, Y" }}</small>
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.description }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                {% endif %}
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
