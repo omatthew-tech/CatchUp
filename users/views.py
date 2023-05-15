@@ -67,4 +67,58 @@ def profile(request, username):
     user_posts = Post.objects.filter(user=user)  # Get the posts of the user
     return render(request, 'users/profile.html', {'user_profile': user_profile, 'posts': user_posts})
 
+from .forms import UserSearchForm
+from .models import UserProfile
+from django.db.models import Q, Value
+from django.db.models.functions import Concat
+
+def search_results(request):
+    form = UserSearchForm(request.GET)
+    if form.is_valid():
+        search = form.cleaned_data['search']
+        results = UserProfile.objects.annotate(
+            full_name=Concat('first_name', Value(' '), 'last_name')
+        ).filter(
+            Q(first_name__icontains=search) | 
+            Q(last_name__icontains=search) | 
+            Q(full_name__icontains=search)
+        )
+    else:
+        results = UserProfile.objects.none()
+    
+    return render(request, 'users/search_results_partial.html', {'results': results})
+
+
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
+from .models import FriendRequest
+
+def send_friend_request(request, username):
+    if request.user.is_authenticated:
+        user = get_object_or_404(User, username=username)
+        friend_request, created = FriendRequest.objects.get_or_create(
+            from_user=request.user,
+            to_user=user)
+        return redirect('...')  # redirect to some page
+
+def accept_friend_request(request, request_id):
+    friend_request = get_object_or_404(FriendRequest, id=request_id)
+    if request.user == friend_request.to_user:
+        friend_request.to_user.friends.add(friend_request.from_user)
+        friend_request.delete()
+        return redirect('...')  # redirect to some page
+    else:
+        # Handle case of someone trying to accept a friend request that is not for them
+        return redirect('...')
+
+def reject_friend_request(request, request_id):
+    friend_request = get_object_or_404(FriendRequest, id=request_id)
+    if request.user == friend_request.to_user:
+        friend_request.delete()
+        return redirect('...')  # redirect to some page
+    else:
+        # Handle case of someone trying to reject a friend request that is not for them
+        return redirect('...')
+
+
 

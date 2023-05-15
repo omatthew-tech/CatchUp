@@ -44,5 +44,9 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('first_name', 'last_name', 'bio', 'location', 'occupation', 'profile_picture',)
 
+from django import forms
+
+class UserSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False)
 
 

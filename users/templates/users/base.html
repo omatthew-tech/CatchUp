@@ -6,7 +6,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'users/styles.css' %}">
     {% block extra_css %}{% endblock %}
-    
+    <!-- Load jQuery for AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -16,16 +17,25 @@
             </div>
             <div class="nav-right">
                 {% if user.is_authenticated %}
+                <div class="search-container">
+                    <form id="searchForm" method="get" action="{% url 'search_results' %}">
+                        <input type="text" name="search" id="searchInput" placeholder="Search users..." autocomplete="off">
+                    </form>
+                    <div id="searchResultsContainer">
+                        <!-- Search results will be inserted here -->
+                    </div>
+                </div>
                 <a href="{% url 'logout' %}">Logout</a>
-                
                 {% else %}
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register' %}">Register</a>
                 {% endif %}
             </div>
-            
         </nav>
     </header>
+    
+    
+    
     <main>
         {% block content %}
         <!-- This block will be overridden by each individual page -->
@@ -35,7 +45,46 @@
         <p>&copy; 2023 CatchUp</p>
     </footer>
     <script src="{% static 'js/scripts.js' %}"></script>
+    <!-- Add the AJAX script for loading the search results -->
+    <script>
+        $(document).ready(function() {
+            $("#searchForm").on("submit", function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "{% url 'search_results' %}",
+                    type: "GET",
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        $("#searchResultsContainer").html(data);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("#searchInput").on("keyup", function() {
+            var query = $(this).val();
+            if (query) {
+                $.ajax({
+                    url: "{% url 'search_results' %}",
+                    type: "GET",
+                    data: {search: query},
+                    success: function(data) {
+                        $("#searchResultsContainer").html(data);
+                    }
+                });
+            } else {
+                $("#searchResultsContainer").html("");
+            }
+        });
+    });
+</script>
+
+
+
 
 

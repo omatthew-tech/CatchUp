@@ -20,6 +20,16 @@
                     </div>
                 </div>
                 <p>{{ user.userprofile.bio }}</p>
+                
+                <!-- Friend request buttons -->
+                {% if user != request.user %}
+                    {% if not friend_request_sent %}
+                        <a href="{% url 'send_friend_request' user.username %}" class="friend-request-btn">Send Friend Request</a>
+                    {% else %}
+                        <p>Friend request sent</p>
+                        <a href="{% url 'cancel_friend_request' friend_request_sent.id %}" class="friend-request-btn">Cancel Friend Request</a>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
         
@@ -40,6 +50,7 @@
         </div>
     </div>
 {% endblock %}
+
 
 
 

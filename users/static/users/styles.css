@@ -169,6 +169,129 @@ form input[type="submit"]:hover {
     background-color: #DAA520; /* Golden Brown background on hover */
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+
+
+/* Search Bar and Results Container */
+
+.search-result-info > div:first-child {
+    display: flex;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #008080;
+}
+
+.search-container {
+    position: relative;
+    order: 1;
+    display: flex;
+    align-items: center;
+    width: 300px; /* Set a specific width to the search container */
+    justify-content: center;
+}
+
+#searchForm input[type="text"] {
+    width: 100%; /* Make the search bar take the full width of the search container */
+    box-sizing: border-box; /* This makes sure the padding and border of the input field are included in the total width */
+}
+
+#searchResultsContainer {
+    position: absolute;
+    top: 100%; /* This will position the container right below the search bar */
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+/* Adjust margin if necessary */
+.search-container {
+    margin-right: 60px; 
+    order: 1;
+    position: relative;
+    align-self: center;
+}
+
+.search-result-link {
+    color: #008080; /* Change this to any color you want */
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-result-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.search-result-info {
+    flex-direction: column;
+    justify-content: flex-start; /* Aligns content to start */
+    align-items: flex-start; /* New property to align items to the start on cross axis */
+    text-align: left; /* Aligns text to the left */
+}
+
+.search-result-link {
+    color: #008080;
+}
+
+.search-result-location-occupation {
+    display: flex;
+    font-size: 0.8em;
+    color: #8B0000;
+}
+
+.search-result-location-occupation p {
+    margin: 0 5px;
+}
+
+.first-name {
+    margin-right: 20px;
+}
+
+.occupation {
+    margin-left: 20px;
+}
+
+.full-name {
+    margin: 0;
+    padding: 0;
+}
+
+.occupation {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
 
 
 
