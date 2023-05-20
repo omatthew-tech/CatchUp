@@ -9,23 +9,28 @@
 {% block content %}
     <div class="profile-container">
         <div class="profile-header">
-            <img class="profile-pic" src="{{ user.userprofile.profile_picture.url }}" alt="{{ user.username }}'s Profile Picture">
+            <img class="profile-pic" src="{{ user_profile.profile_picture.url }}" alt="{{ user_profile.user.username }}'s Profile Picture">
             <div class="profile-info">
                 <div class="profile-details">
-                    <h2 class>{{ user.userprofile.first_name }} {{ user.userprofile.last_name }}</h2>
+                    <div class="name-and-icon">
+                        <h2 class="profile-name">{{ user_profile.first_name }} {{ user_profile.last_name }}</h2>
+                        {% if are_friends %}
+                            <img class="friends-icon" src="{% static 'users/icons/friends_icon.png' %}" alt="Friends">
+                        {% endif %}
+                    </div>
                     <div class="profile-location-occupation">
-                        <p>{{ user.userprofile.occupation }}</p>
+                        <p>{{ user_profile.occupation }}</p>
                         <p>|</p>
-                        <p>{{ user.userprofile.location }}</p>
+                        <p>{{ user_profile.location }}</p>
                     </div>
                 </div>
-                <p>{{ user.userprofile.bio }}</p>
+                <p>{{ user_profile.bio }}</p>
                 
                 <!-- Friend request buttons -->
-                {% if user != request.user %}
+                {% if user_profile.user != request.user and not are_friends %}
                     {% if not friend_request_sent %}
-                        <a href="{% url 'send_friend_request' user.username %}" class="friend-request-btn">Send Friend Request</a>
-                    {% else %}
+                        <a href="{% url 'send_friend_request' user_profile.user.username %}" class="friend-request-btn">Send Friend Request</a>
+                    {% elif friend_request_sent %}
                         <p>Friend request sent</p>
                         <a href="{% url 'cancel_friend_request' friend_request_sent.id %}" class="friend-request-btn">Cancel Friend Request</a>
                     {% endif %}
@@ -34,7 +39,7 @@
         </div>
         
         <div class="profile-posts">
-            <h3>{{ user.userprofile.first_name }}'s Posts</h3>
+            <h3>{{ user_profile.first_name }}'s Posts</h3>
             <!-- Loop through the user's posts -->
             {% for post in posts %}
             <div class="post">
@@ -50,6 +55,11 @@
         </div>
     </div>
 {% endblock %}
+
+
+
+
+
 
 
 

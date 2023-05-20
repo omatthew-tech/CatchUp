@@ -9,7 +9,11 @@ class UserProfile(models.Model):
     bio = models.TextField(blank=True)  # bio can be blank if user doesn't want to add one
     location = models.CharField(max_length=100)
     occupation = models.CharField(max_length=100)
-    profile_picture = models.ImageField(upload_to='profile_pictures', blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures', blank=True, default='default_profile_picture.jpg')
+    friends = models.ManyToManyField("self", blank=True)
+
+    def is_friends(self, user):
+        return user in self.friends.all()
 
 
 

@@ -32,6 +32,19 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'description', 'image']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Title'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
+            'image': forms.FileInput(attrs={'style': 'display: none;'}),
+        }
+        labels = {
+            'title': '',  # This will hide the title label
+            'description': '',  # This will hide the description label
+            'image': '',  # This will hide the image label
+        }
+
+
+
 
 from django import forms
 from .models import UserProfile

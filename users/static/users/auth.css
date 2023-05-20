@@ -1,0 +1,83 @@
+.center-container {
+    height: calc(100vh - 60px); /* Full height of the viewport minus the navbar and footer */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+}
+
+.container {
+    max-width: 400px; /* Set a maximum width */
+    width: 100%; /* Make the container full width on small screens */
+    padding: 30px; /* Add some padding */
+    background-color: FFFFFF; /* Cream background for contrast */
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.1); /* Add a subtle shadow for depth */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+
+.center-text {
+    text-align: center; /* Center the text */
+    color: #008080; /* Teal color for headers */
+}
+
+/* Form field styles */
+
+form input[type="text"], form input[type="password"], form input[type="email"] {
+    width: 100%; /* Make the input fields take up the full width of their container */
+    padding: 15px; /* Increase padding to make the fields taller */
+    margin-bottom: 20px; /* Add some margin to the bottom of each field */
+    border: none; /* Remove border */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Add a subtle shadow to give depth */
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 16px; /* Make the text larger for readability */
+    background-color: #B2DFDB; /* Light Cyan background for input fields */
+    color: #8B0000; /* Deep Red color for input text */
+}
+
+form input[type="text"]:focus, form input[type="password"]:focus, form input[type="email"]:focus {
+    outline: none; /* Remove the default browser outline */
+    box-shadow: 0 0 10px #FF7F50; /* Warm Orange glow effect on focus */
+}
+
+/* Submit Button Style */
+
+form button.submit-btn {
+    background-color: #FF69B4; /* Rosy Pink */
+    color: #FFFDD0; /* Cream */
+    border: none;
+    padding: 15px 0; /* Make the button taller */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Change the mouse cursor when hovering over the button */
+    margin-top: 20px;
+    font-size: 18px; /* Make the button text larger */
+    transition: background-color 0.3s ease; /* Add transition for a smooth hover effect */
+    width: 100%; /* Change the width to 100% to match the fields */
+}
+
+form button.submit-btn:hover {
+    background-color: #DAA520; /* Golden Brown background on hover */
+}
+
+/* Other Links Style */
+
+.login-link {
+    text-align: center; /* Center the text */
+}
+
+.login-link a {
+    color: #FF7F50; /* Warm Orange */
+    text-decoration: none; /* Remove the default underline */
+}
+
+.login-link a:hover {
+    text-decoration: underline; /* Add an underline on hover for better usability */
+}
+
+.form-elements {
+    width: 80%; /* or the percentage that suits your needs */
+    margin: auto; /* centers the div */
+}
+
+
+
+

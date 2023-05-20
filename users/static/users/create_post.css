@@ -1,0 +1,102 @@
+.profile-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.post-form {
+    background-color: #FFFDD0; /* Light cream color */
+    border: 1px solid #DAA520; /* Golden Brown */
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #DAA520; /* Golden Brown */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #DAA520CC; /* Slightly transparent Golden Brown */
+}
+
+.profile-posts {
+    margin-top: 20px;
+}
+
+.post {
+    position: relative;
+    background-color: #FFFDD0;
+    border: 1px solid #DAA520; 
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.post:hover {
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+
+.post-date {
+    color: #aaa; /* light gray */
+    font-size: 0.8rem;
+}
+
+/* Style for the input fields */
+.post-form input[type="text"], .post-form textarea {
+    width: 100%; /* Full-width */
+    padding: 12px; /* Add some padding */
+    border: 1px solid #DAA520; /* Golden Brown border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add some space on top */
+    margin-bottom: 16px; /* Bottom space */
+    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1); /* Subtle box-shadow */
+}
+
+/* Style for the input fields when they receive focus */
+.post-form input[type="text"]:focus, .post-form textarea:focus {
+    border: 2px solid #DAA520; /* Golden Brown border */
+    box-shadow: 0px 0px 5px #DAA520; /* Golden Brown box-shadow */
+}
+
+/* Hide the default file input */
+.post-form input[type="file"] {
+    display: none;
+}
+
+/* Style the custom file upload label */
+.custom-file-upload {
+    height: 20px;
+    width: 20px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #DAA520; /* Golden Brown */
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1); /* Subtle box-shadow */
+    margin-top: 16px;  /* Space above the label */
+    margin-bottom: 16px;  /* Space below the label */
+}
+
+/* Change the background color when hovering over the label */
+.custom-file-upload:hover {
+    background-color: #DAA520CC; /* Slightly transparent Golden Brown */
+}
+

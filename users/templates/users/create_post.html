@@ -1,15 +1,53 @@
-{% extends 'users/base.html' %}
+{% extends "users/base.html" %}
+
+{% load static %}
 {% load crispy_forms_tags %}
 
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/create_post.css' %}" />
+{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h2 class="center-text">Create a Post</h2>
-        <div class="register-form">
-            <form method="POST" enctype="multipart/form-data">
+    <div class="profile-container">
+        <!-- Create a post section -->
+        <div class="post">
+            <form class="post-form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{ form.title|as_crispy_field }}
+                {{ form.description|as_crispy_field }}
+                
+                <!-- Custom file upload -->
+                <label for="id_image" class="custom-file-upload">
+                    <img src="{% static 'users/icons/insert-picture-icon.png' %}" alt="Upload" />
+                </label>
+                {{ form.image|as_crispy_field }}
+
                 <button type="submit" class="submit-btn">Post</button>
             </form>
         </div>
+
+        <!-- User's posts section -->
+        <div class="profile-posts">
+            <h3>Your Posts</h3>
+            {% for post in user_posts %}
+            <div class="post">
+                <small class="post-date">{{ post.created_at|date:"F j, Y" }}</small>
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.description }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                {% endif %}
+            </div>
+            {% empty %}
+                <p>You have not posted anything yet.</p>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
+
+
+
+
+
+
+

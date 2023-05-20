@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+
 
 
 
@@ -36,6 +38,7 @@ class RegisterView(CreateView):
 
 @login_required
 def create_post(request):
+    user_posts = Post.objects.filter(user=request.user)
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -45,7 +48,8 @@ def create_post(request):
             return redirect('home')
     else:
         form = PostForm()
-    return render(request, 'users/create_post.html', {'form': form})
+    return render(request, 'users/create_post.html', {'form': form, 'user_posts': user_posts})
+
 
 @login_required
 def edit_profile(request):
@@ -59,13 +63,6 @@ def edit_profile(request):
         form = UserProfileForm(instance=request.user.userprofile)
 
     return render(request, 'users/edit_profile.html', {'form': form})
-
-
-def profile(request, username):
-    user = get_object_or_404(User, username=username)
-    user_profile = UserProfile.objects.get(user=user)
-    user_posts = Post.objects.filter(user=user)  # Get the posts of the user
-    return render(request, 'users/profile.html', {'user_profile': user_profile, 'posts': user_posts})
 
 from .forms import UserSearchForm
 from .models import UserProfile
@@ -93,32 +90,61 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from .models import FriendRequest
 
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    user_profile = UserProfile.objects.get(user=user)
+    user_posts = Post.objects.filter(user=user)  # Get the posts of the user
+    friend_request_sent = FriendRequest.objects.filter(
+        sender=request.user,
+        receiver=user).first()
+    are_friends = request.user.userprofile in user_profile.friends.all()  # Check if they are friends
+    return render(request, 'users/profile.html', {'user_profile': user_profile, 'posts': user_posts, 'friend_request_sent': friend_request_sent, 'are_friends': are_friends})
+
+
+
 def send_friend_request(request, username):
     if request.user.is_authenticated:
         user = get_object_or_404(User, username=username)
         friend_request, created = FriendRequest.objects.get_or_create(
-            from_user=request.user,
-            to_user=user)
-        return redirect('...')  # redirect to some page
+            sender=request.user,
+            receiver=user)
+        return redirect(request.META.get('HTTP_REFERER', 'default_if_none'))
 
 def accept_friend_request(request, request_id):
     friend_request = get_object_or_404(FriendRequest, id=request_id)
-    if request.user == friend_request.to_user:
-        friend_request.to_user.friends.add(friend_request.from_user)
+    if request.user == friend_request.receiver:
+        friend_request.receiver.userprofile.friends.add(friend_request.sender.userprofile)
         friend_request.delete()
-        return redirect('...')  # redirect to some page
+        return redirect(reverse('profile', args=[friend_request.sender.username])) 
     else:
         # Handle case of someone trying to accept a friend request that is not for them
-        return redirect('...')
+        return redirect('...') # Redirect to a suitable error page
+
+
 
 def reject_friend_request(request, request_id):
     friend_request = get_object_or_404(FriendRequest, id=request_id)
-    if request.user == friend_request.to_user:
+    if request.user == friend_request.receiver:
         friend_request.delete()
         return redirect('...')  # redirect to some page
     else:
         # Handle case of someone trying to reject a friend request that is not for them
         return redirect('...')
+
+def cancel_friend_request(request, request_id):
+    friend_request = get_object_or_404(FriendRequest, id=request_id)
+    if request.user == friend_request.sender:
+        friend_request.delete()
+        return redirect(request.META.get('HTTP_REFERER', 'default_if_none'))  # redirect to some page
+    else:
+        # Handle case of someone trying to cancel a friend request that is not for them
+        return redirect('...')
+
+def friend_requests(request):
+    if not request.user.is_authenticated:
+        return redirect('login')  # or whatever your login route is
+    incoming_requests = FriendRequest.objects.filter(receiver=request.user)
+    return render(request, 'users/friend_requests.html', {'friend_requests': incoming_requests})
 
 
 

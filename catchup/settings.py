@@ -134,4 +134,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'create_post'
 
+# This is needed if you're going to collect static files into one folder using Django's collectstatic command
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# These are locations where Django will also look for static files aside from each of the STATICFILES_DIRS
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 
