@@ -13,12 +13,14 @@
             <div class="profile-info">
                 <div class="profile-details">
                     <div class="name-and-icon">
-                        <h2 class="profile-name">{{ user_profile.first_name }} {{ user_profile.last_name }}</h2>
-                        {% if are_friends %}
-                            <img class="friends-icon" src="{% static 'users/icons/friends_icon.png' %}" alt="Friends">
-                        {% endif %}
+                        <div class="name-and-icon-inner"> 
+                            <h2 class="profile-name">{{ user_profile.first_name }} {{ user_profile.last_name }}</h2>
+                            {% if are_friends %}
+                                <img class="friends-icon" src="{% static 'users/icons/friends_icon.png' %}" alt="Friends">
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="profile-location-occupation">
+                    <div class="profile-location-occupation"> <!-- This div is moved out of the 'name-and-icon' div -->
                         <p>{{ user_profile.occupation }}</p>
                         <p>|</p>
                         <p>{{ user_profile.location }}</p>
@@ -55,6 +57,7 @@
         </div>
     </div>
 {% endblock %}
+
 
 
 

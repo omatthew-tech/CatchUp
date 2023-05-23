@@ -1,20 +1,27 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'users/search_results_partial.css' %}">
+
 {% for userprofile in results %}
-    <a class="search-result-link" href="{% url 'profile' userprofile.user.username %}">
-        <div class="search-result">
-            <img class="search-result-pic" src="{{ userprofile.profile_picture.url }}" alt="{{ userprofile.user.username }}'s Profile Picture">
-            <div class="search-result-info">
-                <p class="full-name">{{ userprofile.first_name }} {{ userprofile.last_name }}</p>
-                <div class="search-result-location-occupation">
-                    <p class="occupation">{{ userprofile.occupation }}</p>
-                    <p>|</p>
-                    <p>{{ userprofile.location }}</p>
-                </div>
-            </div>
+    <a href="{% url 'profile' username=userprofile.user.username %}" class="search-result-item">
+        <div class="search-result-img" style="background-image: url('{{ userprofile.profile_picture.url }}');"></div>
+        <div class="search-result-info">
+            <h4>{{ userprofile.first_name }} {{ userprofile.last_name }}</h4>
+            <p>{{ userprofile.occupation }} | {{ userprofile.location }}</p>
         </div>
     </a>
 {% empty %}
-    <div>No users found.</div>
+    <p>No users found.</p>
 {% endfor %}
+
+
+
+
+
+
+
+
+
+
 
 
 

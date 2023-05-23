@@ -1,0 +1,47 @@
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-result-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.search-result-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.search-result-info h4 {
+    font-size: 1rem;
+    color: #FF7F50; 
+    margin-bottom: 0.2em;  /* adjust this value to your preference */
+}
+
+.search-result-info p {
+    font-size: 0.85rem;
+    color: #008080;
+    margin-top: 0.2em;  /* adjust this value to your preference */
+}
+
+.search-result-item:hover {
+    background-color: #F0E68C;
+}
+
+.search-result-item:hover h4 {
+    color: #8B0000;
+}
+
+
+
+

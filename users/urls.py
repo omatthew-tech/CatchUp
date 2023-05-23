@@ -22,5 +22,7 @@ urlpatterns = [
     path('reject_friend_request/<int:request_id>/', views.reject_friend_request, name='reject_friend_request'),
     path('cancel_friend_request/<int:request_id>/', views.cancel_friend_request, name='cancel_friend_request'),
     path('friend_requests/', views.friend_requests, name='friend_requests'),
+    path('like_post/<int:post_id>/', views.like_post, name='like_post'),
+
 
 ]

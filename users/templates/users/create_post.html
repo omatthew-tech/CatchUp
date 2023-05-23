@@ -26,24 +26,52 @@
             </form>
         </div>
 
-        <!-- User's posts section -->
+        <!-- Friends' posts section -->
         <div class="profile-posts">
-            <h3>Your Posts</h3>
-            {% for post in user_posts %}
+            <h3>Friends' Posts</h3>
+            {% for post in friends_posts %}
             <div class="post">
-                <small class="post-date">{{ post.created_at|date:"F j, Y" }}</small>
-                <h4>{{ post.title }}</h4>
+                <div class="post-header">
+                    <div class="profile-image-container">
+                        <img src="{{ post.user.userprofile.profile_picture.url }}" alt="{{ post.user.userprofile.first_name }}" class="profile-pic">
+                    </div>
+                    <div class="post-user-name">
+                        <strong>{{ post.user.userprofile.first_name }} {{ post.user.userprofile.last_name }}</strong>
+                        <small class="post-date">{{ post.created_at|date:"F j, Y" }}</small>
+                        <h4>{{ post.title }}</h4>
+                    </div>
+                </div>
                 <p>{{ post.description }}</p>
                 {% if post.image %}
                     <img src="{{ post.image.url }}" alt="{{ post.title }}">
                 {% endif %}
+                
+                <!-- Like button -->
+                <form method="POST" action="{% url 'like_post' post.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="like-btn">
+                        {% if post in liked_posts %}
+                            Unlike
+                        {% else %}
+                            Like
+                        {% endif %}
+                    </button>
+                </form>
             </div>
             {% empty %}
-                <p>You have not posted anything yet.</p>
+                <p>None of your friends have posted anything yet.</p>
             {% endfor %}
         </div>
+
     </div>
 {% endblock %}
+
+
+
+
+
+
+
 
 
 

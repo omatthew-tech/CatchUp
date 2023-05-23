@@ -11,6 +11,9 @@ from .models import UserProfile
 from .forms import UserProfileForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from .models import Like
+from django.http import HttpResponseRedirect
+
 
 
 
@@ -38,7 +41,16 @@ class RegisterView(CreateView):
 
 @login_required
 def create_post(request):
-    user_posts = Post.objects.filter(user=request.user)
+    user_profile = UserProfile.objects.get(user=request.user)
+    friends_profiles = user_profile.friends.all()
+    friends_users = [profile.user for profile in friends_profiles]  # get User instances
+    
+    # This line retrieves posts that are liked by the user
+    liked_posts_ids = Like.objects.filter(user=request.user).values_list('post', flat=True)
+
+    # Modified this line to exclude liked posts
+    friends_posts = Post.objects.filter(user__in=friends_users).exclude(id__in=liked_posts_ids)
+    
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -48,7 +60,10 @@ def create_post(request):
             return redirect('home')
     else:
         form = PostForm()
-    return render(request, 'users/create_post.html', {'form': form, 'user_posts': user_posts})
+    return render(request, 'users/create_post.html', {'form': form, 'friends_posts': friends_posts})
+
+
+
 
 
 @login_required
@@ -64,6 +79,13 @@ def edit_profile(request):
 
     return render(request, 'users/edit_profile.html', {'form': form})
 
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    Like.objects.get_or_create(user=request.user, post=post)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
 from .forms import UserSearchForm
 from .models import UserProfile
 from django.db.models import Q, Value
@@ -73,17 +95,16 @@ def search_results(request):
     form = UserSearchForm(request.GET)
     if form.is_valid():
         search = form.cleaned_data['search']
-        results = UserProfile.objects.annotate(
-            full_name=Concat('first_name', Value(' '), 'last_name')
-        ).filter(
+        results = UserProfile.objects.filter(
             Q(first_name__icontains=search) | 
-            Q(last_name__icontains=search) | 
-            Q(full_name__icontains=search)
+            Q(last_name__icontains=search)
         )
     else:
         results = UserProfile.objects.none()
-    
+
     return render(request, 'users/search_results_partial.html', {'results': results})
+
+
 
 
 from django.shortcuts import render, get_object_or_404

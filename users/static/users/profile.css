@@ -8,7 +8,7 @@
 .profile-header {
     position: relative;
     display: flex;
-    align-items: start; 
+    align-items: center; 
     gap: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #ccc;
@@ -27,32 +27,41 @@
     justify-content: space-between;
 }
 
-.profile-details {
-    margin-bottom: 0.5rem;  /* adjust this value to increase or decrease the space */
-}
+
+
+
+
 
 .name-and-icon {
     display: flex;
-    align-items: center;
+    align-items: baseline; /* change here, align to baseline */
     gap: 10px;
 }
 
 .friends-icon {
-    display: inline-block;
-    width: 20px;  /* Adjust this as needed */
-    height: 20px;  /* Adjust this as needed */
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    margin-left: 10px; /* add this line */
 }
+
+
+
+
+
 
 .profile-location-occupation {
     display: flex;
-    gap: 10px;  /* adjust this value to increase or decrease the space between the elements */
-    align-items: center;  /* center the elements vertically */
-    font-size: 0.85rem;  /* adjust this value to increase or decrease the font size */
-    color: #777;  /* this is a lighter gray color */
+    gap: 10px;  
+    align-items: center;
+    font-size: 0.85rem;
+    color: #777; 
+    margin-top: 0.2em;
 }
 
 .profile-location-occupation p {
-    margin: 0;  /* removes the default margin from the <p> tags */
+    margin: 0;
 }
 
 .profile-posts {
@@ -80,9 +89,23 @@
 }
 
 .post-date {
-    color: #aaa; /* light gray */
+    color: #aaa;
     font-size: 0.8rem;
 }
+.name-and-icon-inner {
+    display: flex;
+    align-items: center;  /* Centers the children vertically */
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

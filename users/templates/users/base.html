@@ -12,29 +12,29 @@
 <body>
     <header class="header">
         <nav>
-            <div class="nav-left">
-                <a href="{% url 'home' %}">CatchUp</a>
-            </div>
-            <div class="nav-right">
-                {% if user.is_authenticated %}
-                <div class="search-container">
-                    <form id="searchForm" method="get" action="{% url 'search_results' %}">
-                        <input type="text" name="search" id="searchInput" placeholder="Search users..." autocomplete="off">
-                    </form>
-                    <div id="searchResultsContainer">
+            <a class="logo" href="{% url 'home' %}">CatchUp</a>
+            {% if user.is_authenticated %}
+            <div class="search-container dropdown">
+                <form id="searchForm" method="get" action="{% url 'search_results' %}">
+                    <input type="text" name="search" id="searchInput" placeholder="Search users..." autocomplete="off">
+                    <div id="searchResultsContainer" class="dropdown-content">
                         <!-- Search results will be inserted here -->
                     </div>
-                </div>
+                </form>
+            </div>
+            
+            
+            <div class="nav-links">
                 <a href="{% url 'logout' %}">Logout</a>
-                {% else %}
+            </div>
+            {% else %}
+            <div class="nav-links">
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register' %}">Register</a>
-                {% endif %}
             </div>
+            {% endif %}
         </nav>
     </header>
-    
-    
     
     <main>
         {% block content %}
@@ -44,45 +44,33 @@
     <footer>
         <p>&copy; 2023 CatchUp</p>
     </footer>
-    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'users/scripts.js' %}"></script>
     <!-- Add the AJAX script for loading the search results -->
     <script>
         $(document).ready(function() {
-            $("#searchForm").on("submit", function(e) {
+            $("#searchInput").on("keyup", function(e) {
                 e.preventDefault();
-                $.ajax({
-                    url: "{% url 'search_results' %}",
-                    type: "GET",
-                    data: $(this).serialize(),
-                    success: function(data) {
-                        $("#searchResultsContainer").html(data);
-                    }
-                });
+                var query = $(this).val();
+                if (query) {
+                    $.ajax({
+                        url: "{% url 'search_results' %}",
+                        type: "GET",
+                        data: {search: query},
+                        success: function(data) {
+                            $("#searchResultsContainer").html(data);
+                        }
+                    });
+                } else {
+                    $("#searchResultsContainer").html("");
+                }
             });
         });
     </script>
+    
 </body>
 </html>
 
-<script>
-    $(document).ready(function() {
-        $("#searchInput").on("keyup", function() {
-            var query = $(this).val();
-            if (query) {
-                $.ajax({
-                    url: "{% url 'search_results' %}",
-                    type: "GET",
-                    data: {search: query},
-                    success: function(data) {
-                        $("#searchResultsContainer").html(data);
-                    }
-                });
-            } else {
-                $("#searchResultsContainer").html("");
-            }
-        });
-    });
-</script>
+
 
 
 
