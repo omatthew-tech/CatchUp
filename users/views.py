@@ -46,10 +46,10 @@ def create_post(request):
     friends_users = [profile.user for profile in friends_profiles]  # get User instances
     
     # This line retrieves posts that are liked by the user
-    liked_posts_ids = Like.objects.filter(user=request.user).values_list('post', flat=True)
+    liked_posts = Post.objects.filter(likes=request.user)
 
     # Modified this line to exclude liked posts
-    friends_posts = Post.objects.filter(user__in=friends_users).exclude(id__in=liked_posts_ids)
+    friends_posts = Post.objects.filter(user__in=friends_users).exclude(id__in=liked_posts)
     
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -61,6 +61,7 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, 'users/create_post.html', {'form': form, 'friends_posts': friends_posts})
+
 
 
 
@@ -82,8 +83,12 @@ def edit_profile(request):
 @login_required
 def like_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    Like.objects.get_or_create(user=request.user, post=post)
+    if post.likes.filter(id=request.user.id).exists():  # Check if the user already likes this post
+        post.likes.remove(request.user)  # If yes, remove their like
+    else:
+        post.likes.add(request.user)  # If not, add their like
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
 
 
 from .forms import UserSearchForm
@@ -114,12 +119,17 @@ from .models import FriendRequest
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_profile = UserProfile.objects.get(user=user)
-    user_posts = Post.objects.filter(user=user)  # Get the posts of the user
+    user_posts = Post.objects.filter(user=user)
     friend_request_sent = FriendRequest.objects.filter(
         sender=request.user,
         receiver=user).first()
-    are_friends = request.user.userprofile in user_profile.friends.all()  # Check if they are friends
+    are_friends = request.user.userprofile in user_profile.friends.all()
+    
     return render(request, 'users/profile.html', {'user_profile': user_profile, 'posts': user_posts, 'friend_request_sent': friend_request_sent, 'are_friends': are_friends})
+
+
+
+
 
 
 

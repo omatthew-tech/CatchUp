@@ -51,12 +51,16 @@
                 {% if post.image %}
                     <img src="{{ post.image.url }}" alt="{{ post.title }}">
                 {% endif %}
+                <p>Likes: {{ post.like_count }}</p>
             </div>
             
             {% endfor %}
         </div>
     </div>
 {% endblock %}
+
+
+
 
 
 

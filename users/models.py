@@ -14,6 +14,7 @@ class UserProfile(models.Model):
 
     def is_friends(self, user):
         return user in self.friends.all()
+    
 
 
 
@@ -23,9 +24,12 @@ class Post(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='posts/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
     def __str__(self):
         return self.title
+    def like_count(self):
+        return self.likes.count()
     
 class FriendRequest(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='friend_request_sent')
