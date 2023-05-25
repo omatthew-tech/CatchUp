@@ -17,15 +17,19 @@
             <div class="search-container dropdown">
                 <form id="searchForm" method="get" action="{% url 'search_results' %}">
                     <input type="text" name="search" id="searchInput" placeholder="Search users..." autocomplete="off">
-                    <div id="searchResultsContainer" class="dropdown-content">
+                    <div id="searchResultsContainer" class="search-dropdown-content">
                         <!-- Search results will be inserted here -->
                     </div>
                 </form>
             </div>
             
-            
-            <div class="nav-links">
-                <a href="{% url 'logout' %}">Logout</a>
+            <div class="nav-links dropdown" id="myDropdown">
+                <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
+                <div class="user-dropdown-content">
+                    <a href="{% url 'profile' user.username %}">Profile</a>
+                    <a href="{% url 'friend_requests' %}">Friend Requests</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
             </div>
             {% else %}
             <div class="nav-links">
@@ -69,6 +73,9 @@
     
 </body>
 </html>
+
+
+
 
 
 

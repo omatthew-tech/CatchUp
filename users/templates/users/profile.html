@@ -51,13 +51,17 @@
                 {% if post.image %}
                     <img src="{{ post.image.url }}" alt="{{ post.title }}">
                 {% endif %}
-                <p>Likes: {{ post.like_count }}</p>
+                <!-- Show likes count only to the profile owner -->
+                {% if request.user == user_profile.user %}
+                    <p>Likes: {{ post.like_count }}</p>
+                {% endif %}
             </div>
             
             {% endfor %}
         </div>
     </div>
 {% endblock %}
+
 
 
 
