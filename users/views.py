@@ -177,5 +177,24 @@ def friend_requests(request):
     incoming_requests = FriendRequest.objects.filter(receiver=request.user)
     return render(request, 'users/friend_requests.html', {'friend_requests': incoming_requests})
 
+from django.shortcuts import render, get_object_or_404
+from .models import Post, Comment
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    comments = Comment.objects.filter(post=post)
+
+    if request.method == 'POST':
+        body = request.POST.get('body')
+        new_comment = Comment.objects.create(post=post, user=request.user, body=body)
+        new_comment.save()
+
+    context = {
+        'post': post,
+        'comments': comments,
+    }
+
+    return render(request, 'users/post_detail.html', context)
+
 
 

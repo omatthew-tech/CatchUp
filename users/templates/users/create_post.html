@@ -26,15 +26,19 @@
             </form>
         </div>
 
-        <!-- Friends' posts section -->
-        <div class="profile-posts">
-            <h3>Friends' Posts</h3>
-            {% for post in friends_posts %}
-            <div class="post">
+<!-- Friends' posts section -->
+<div class="profile-posts">
+    <h3>Friends' Posts</h3>
+    {% for post in friends_posts %}
+        <div class="post">
+            <a href="{% url 'post_detail' post.id %}" style="display: block; color: inherit; text-decoration: none;">
                 <div class="post-header">
-                    <div class="profile-image-container">
-                        <img src="{{ post.user.userprofile.profile_picture.url }}" alt="{{ post.user.userprofile.first_name }}" class="profile-pic">
-                    </div>
+                    <a href="{% url 'profile' post.user.username %}" style="color: inherit; text-decoration: none;">
+                        <div class="profile-image-container">
+                            <img src="{{ post.user.userprofile.profile_picture.url }}" alt="{{ post.user.userprofile.first_name }}" class="profile-pic">
+                            <div class="view-profile">View Profile</div>
+                        </div>
+                    </a>
                     <div class="post-user-name">
                         <strong>{{ post.user.userprofile.first_name }} {{ post.user.userprofile.last_name }}</strong>
                         <small class="post-date">{{ post.created_at|date:"F j, Y" }}</small>
@@ -45,26 +49,33 @@
                 {% if post.image %}
                     <img src="{{ post.image.url }}" alt="{{ post.title }}">
                 {% endif %}
-                
-                <!-- Like button -->
-                <form method="POST" action="{% url 'like_post' post.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="like-btn">
-                        {% if post in liked_posts %}
-                            Unlike
-                        {% else %}
-                            Like
-                        {% endif %}
-                    </button>
-                </form>
-            </div>
-            {% empty %}
-                <p>None of your friends have posted anything yet.</p>
-            {% endfor %}
+            </a>
+                    
+            <!-- Like button -->
+            <form method="POST" action="{% url 'like_post' post.id %}" style="display: inline-block;">
+                {% csrf_token %}
+                <button type="submit" class="like-btn">
+                    {% if post in liked_posts %}
+                        Unlike
+                    {% else %}
+                        Like
+                    {% endif %}
+                </button>
+            </form>
+
+            <!-- Comment button -->
+            <a href="{% url 'post_detail' post.id %}" class="comment-btn">Comment</a>
+
         </div>
+    {% empty %}
+        <p>None of your friends have posted anything yet.</p>
+    {% endfor %}
+</div>
+
 
     </div>
 {% endblock %}
+
 
 
 

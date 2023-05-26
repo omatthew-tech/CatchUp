@@ -1,0 +1,151 @@
+.post-detail-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.post-content {
+    position: relative;
+    background-color: #FFFDD0;
+    border: 1px solid #DAA520; 
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.post-content:hover {
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.post-title {
+    color: #DAA520; /* Golden Brown */
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.post-description {
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment {
+    position: relative;
+    background-color: #FFFDD0;
+    border: 1px solid #DAA520; 
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.comment:hover {
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+}
+
+.comment p {
+    margin-bottom: 0;
+    color: #000;
+}
+
+.comment-form {
+    background-color: #FFFDD0; /* Light cream color */
+    border: 1px solid #DAA520; /* Golden Brown */
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.comment-form textarea {
+    width: 100%; /* Full-width */
+    padding: 12px; /* Add some padding */
+    border: 1px solid #DAA520; /* Golden Brown border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add some space on top */
+    margin-bottom: 16px; /* Bottom space */
+    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1); /* Subtle box-shadow */
+}
+
+.comment-form textarea:focus {
+    border: 2px solid #DAA520; /* Golden Brown border */
+    box-shadow: 0px 0px 5px #DAA520; /* Golden Brown box-shadow */
+}
+
+.comment-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #DAA520; /* Golden Brown */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background-color: #DAA520CC; /* Slightly transparent Golden Brown */
+}
+
+.profile-image-container {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    margin-right: 15px;
+}
+
+.profile-pic {
+    display: inline;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    min-width: 80px;
+    min-height: 80px;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    margin: auto;
+}
+
+.post-user-name strong {
+    color: #008080;
+}
+.post-title {
+    color: #008080;
+}
+
+.post-header {
+    display: flex;
+    align-items: start;
+    gap: 15px;
+}
+.post-user-name {
+    flex-grow: 1;
+}
+
+.post-title-description {
+    clear: both; /* Clears the floating effect from the previous row */
+    padding-top: 20px;
+}
+
+
+
+
+

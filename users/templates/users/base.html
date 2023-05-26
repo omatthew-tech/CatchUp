@@ -23,9 +23,9 @@
                 </form>
             </div>
             
-            <div class="nav-links dropdown" id="myDropdown">
-                <button onclick="toggleDropdown()" class="dropbtn">Menu</button>
-                <div class="user-dropdown-content">
+            <div class="nav-links dropdown">
+                <button id="menuButton" class="dropbtn">Menu</button>
+                <div id="myDropdown" class="dropdown-content">
                     <a href="{% url 'profile' user.username %}">Profile</a>
                     <a href="{% url 'friend_requests' %}">Friend Requests</a>
                     <a href="{% url 'logout' %}">Logout</a>
@@ -68,11 +68,16 @@
                     $("#searchResultsContainer").html("");
                 }
             });
+
+            // Dropdown click handler
+            document.querySelector('#menuButton').addEventListener('click', function() {
+                document.querySelector('#myDropdown').classList.toggle('show');
+            });
         });
     </script>
-    
 </body>
 </html>
+
 
 
 
